@@ -8,6 +8,9 @@ public class PlayerControllers : MonoBehaviour
 
     public float speed;
 
+    public float maxShootDelay;
+    private float curShootDelay;
+
     private void Update()
     {
         FireShoot();
@@ -19,8 +22,14 @@ public class PlayerControllers : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space))
         {
-            Instantiate(this.bullet, this.transform.position, this.transform.rotation);
+            if (this.curShootDelay < 0f)
+            {
+                this.curShootDelay = this.maxShootDelay;
+                Instantiate(this.bullet, this.transform.position, this.transform.rotation);
+            }
         }
+
+        this.curShootDelay = this.curShootDelay - Time.deltaTime * 1f;
 
         return;
     }

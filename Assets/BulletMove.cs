@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
-    public GameObject bullet;
 
     public float speed;
 
     private void Update()
     {
-        FireShoot();
         Move();
-        return;
-    }
-
-    private void FireShoot()
-    {
-        Instantiate(this.bullet, this.transform);
         return;
     }
 
