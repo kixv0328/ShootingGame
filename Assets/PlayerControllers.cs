@@ -4,46 +4,33 @@ using UnityEngine;
 
 public class PlayerControllers : MonoBehaviour
 {
-    public GameObject bullet;
+    public PlayerAnimation playerAnimation;
 
     public float speed;
 
-    public float maxShootDelay;
-    private float curShootDelay;
-
     private void Update()
     {
-        FireShoot();
         InputMove();
-        return;
-    }
-
-    private void FireShoot()
-    {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            if (this.curShootDelay < 0f)
-            {
-                this.curShootDelay = this.maxShootDelay;
-                Instantiate(this.bullet, this.transform.position, this.transform.rotation);
-            }
-        }
-
-        this.curShootDelay = this.curShootDelay - Time.deltaTime * 1f;
-
         return;
     }
 
     private void InputMove()
     {
+        this.playerAnimation.Setldle(true);
+        this.playerAnimation.SetMoveX(0f);
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             this.transform.Translate(Vector3.left * this.speed * Time.deltaTime);
+            this.playerAnimation.Setldle(false);
+            this.playerAnimation.SetMoveX(-1f);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             this.transform.Translate(Vector3.right * this.speed * Time.deltaTime);
+            this.playerAnimation.Setldle(false);
+            this.playerAnimation.SetMoveX(+1f);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
