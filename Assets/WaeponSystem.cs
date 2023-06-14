@@ -6,15 +6,20 @@ using UnityEngine;
 
 public class SettingShoot
 {
-    public Transform[] position;
+    public Transform[] positions;
 }
 
 public class WaeponSystem : MonoBehaviour
 {
-    public SettingShoot[] SettingShoot;
+    public int shootLv;
+    public SettingShoot[] settingShoots;
 
     public GameObject bullet;
+
+    public bool isAuto;
+
     public float maxShootDelay;
+
     private float curShootDelay;
 
     private void Update()
@@ -25,12 +30,19 @@ public class WaeponSystem : MonoBehaviour
     
     private void FireShoot()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if ((Input.GetKey(KeyCode.Space) && !this.isAuto) || this.isAuto)
         {
             if (this.curShootDelay < 0f)
             {
                 this.curShootDelay = this.maxShootDelay;
-                Instantiate(this.bullet, this.transform.position, this.transform.rotation);
+
+                int tempShootCount = this.settingShoots[this.shootLv].positions.Length;
+                for(int i = 0; i < tempShootCount; i++)
+                {
+                    Vector2 tempShootPostion = this.settingShoots[this.shootLv].positions[i].position;
+                    Quaternion tempShootQuaternion = this.settingShoots[this.shootLv].positions[i].rotation;
+                    Instantiate(this.bullet, tempShootPostion, tempShootQuaternion);
+                }
             }
         }
 
