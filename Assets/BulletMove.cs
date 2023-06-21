@@ -34,11 +34,11 @@ public class BulletMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (t_Max.y < t_BullentPos.y)
+        if (t_Max.x < t_BullentPos.x)
         {
             Destroy(this.gameObject);
         }
-        else if (t_Min.y > t_BullentPos.y)
+        else if (t_Min.x > t_BullentPos.x)
         {
             Destroy(this.gameObject);
         }
@@ -51,10 +51,14 @@ public class BulletMove : MonoBehaviour
         if (collision.GetComponent<EnemySystem>() != null)
         {
             collision.GetComponent<EnemySystem>().DropItem();
+            collision.GetComponent<EnemySystem>().CheckHp();
+        }
+        else if (collision.GetComponent<PlayerControllers>() != null)
+        {
+            Destroy(collision.gameObject);
         }
 
         Destroy(this.gameObject);
-        Destroy(collision.gameObject);
         this.effectGenerator.DropEffect();
         return;
     }
