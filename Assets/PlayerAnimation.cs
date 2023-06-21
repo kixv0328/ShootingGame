@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
         return;
     }
 
-    public void Setldle(bool isIdle)
+    public void SetIdle(bool isIdle)
     {
         this.animator.SetBool("Idle", isIdle);
         return;

@@ -8,12 +8,12 @@ public class LoopMap : MonoBehaviour
 
     public SpriteRenderer sR;
 
-    public void Update()
+    private void Update()
     {
         Loop();
         return;
     }
-    
+
     private void Loop()
     {
         Vector2 tempSize = new Vector2();
