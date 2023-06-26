@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class EnemySystem : MonoBehaviour
 {
+    [Header("체력")]
+    public int hp;
+
+    [Header("이동속도")]
     public float speed;
 
+    [Header("아이템")]
     public ItemGradeMove itemGradeMove;
     public bool isDropItem;
+
+    [Header("이미지 컴포넌트")]
+    public SpriteRenderer spriteRenderer;
+
+    [Header("원본 이미지")]
+    public Sprite orginSkin;
+
+    [Header("피격 이미지")]
+    public Sprite hitSkin;
+
+    [Header("피격 딜레이")]
+    public float curHitDelay;
+    public float maxHitDelay;
 
     private void Update()
     {
         AutoMove();
+        UpdateHitDelay();
         return;
     }
 
@@ -51,6 +70,41 @@ public class EnemySystem : MonoBehaviour
             Vector3 t_DropPos = this.transform.position;
             Instantiate(this.itemGradeMove, t_DropPos, Quaternion.identity);
         }
+        return;
+    }
+
+    public void CheckHp()
+    {
+        this.hp = this.hp - 1;
+        if (this.hp <= 0)
+        {
+            Destroy(this.gameObject);
+            DropItem();
+        }
+        return;
+    }
+
+    public void HitAction()
+    {
+        //1. 공격을 받았다
+        //2. 피격 이미지로 변경한다
+        this.spriteRenderer.sprite = this.hitSkin;
+        //3. 일정 시간 뒤...<-
+        this.curHitDelay = this.maxHitDelay;
+        return;
+    }
+
+    public void UpdateHitDelay()
+    {
+        if (this.curHitDelay < 0f)
+        {
+            this.spriteRenderer.sprite = this.orginSkin;
+        }
+        else
+        {
+            this.curHitDelay = this.curHitDelay - Time.deltaTime * 1f;
+        }
+
         return;
     }
 }

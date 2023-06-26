@@ -50,8 +50,8 @@ public class BulletMove : MonoBehaviour
     {
         if (collision.GetComponent<EnemySystem>() != null)
         {
-            collision.GetComponent<EnemySystem>().DropItem();
             collision.GetComponent<EnemySystem>().CheckHp();
+            collision.GetComponent<EnemySystem>().HitAction();
         }
         else if (collision.GetComponent<PlayerControllers>() != null)
         {

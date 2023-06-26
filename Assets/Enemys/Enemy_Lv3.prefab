@@ -101,9 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733488cef0f9f2b4aac3d16b0be8da26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
   speed: 1
   itemGradeMove: {fileID: 7363517631487605900, guid: d63ca69fa202b7d4b99f5b142980f13d, type: 3}
   isDropItem: 1
+  spriteRenderer: {fileID: 6123590053099320453}
+  orginSkin: {fileID: -8421458170528590454, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  hitSkin: {fileID: 3714015224569861163, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  curHitDelay: 0
+  maxHitDelay: 0.1
 --- !u!50 &6123590053099320504
 Rigidbody2D:
   serializedVersion: 4
